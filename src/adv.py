@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -37,15 +38,64 @@ room['treasure'].s_to = room['narrow']
 # Main
 #
 
+print("\nWelcome to THE ADVENTURE GAME\n")
+name = input("What is your name, young grasshopper?\n")
+location = room['outside']
+status = True
+warning = "No such direction in this room."
+
 # Make a new player object that is currently in the 'outside' room.
+
+player = Player(name, location)
 
 # Write a loop that:
 #
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
+# + Prints the current room name
+# + Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+while status:
+    print(f"\n{player}")
+
+    direction = input(
+        "\nWhich direction do you want to move?\nN, E, S, W: ").upper()
+
+    if len(direction) > 0:
+        if direction[0] == "N":
+            if hasattr(player.location, "n_to"):
+                print(f"{player.name} decided to move North.")
+                player.location = location.n_to
+                location = location.n_to
+            else:
+                print(warning)
+        elif direction[0] == "E":
+            if hasattr(player.location, "e_to"):
+                print(f"{player.name} decided to move East.")
+                player.location = location.e_to
+                location = location.e_to
+            else:
+                print(warning)
+        elif direction[0] == "S":
+            if hasattr(player.location, "s_to"):
+                print(f"{player.name} decided to move South.")
+                player.location = location.s_to
+                location = location.s_to
+            else:
+                print(warning)
+        elif direction[0] == "W":
+            if hasattr(player.location, "w_to"):
+                print(f"{player.name} decided to move West.")
+                player.location = location.w_to
+                location = location.w_to
+            else:
+                print(warning)
+        elif direction[0] == "Q":
+            print(f"Thanks for playing {player.name}. Bye for now!")
+            status = False
+        else:
+            print("No such direction.")
