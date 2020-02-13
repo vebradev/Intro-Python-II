@@ -23,10 +23,10 @@ class Room:
             return output
 
 
-a = Room("A ROOM", "Not so big actually", ["item", "item2"])
-b = Room("B ROOM", "Smaller than A", ["item"])
-c = Room("C ROOM", "Smallest of em all")
+# a = Room("A ROOM", "Not so big actually", ["item", "item2"])
+# b = Room("B ROOM", "Smaller than A", ["item"])
+# c = Room("C ROOM", "Smallest of em all")
 
-print(a)
-print(b)
-print(c)
+# print(a)
+# print(b)
+# print(c)
