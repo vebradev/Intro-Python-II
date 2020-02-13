@@ -3,9 +3,18 @@
 
 
 class Room:
-    def __init__(self, name, description):
+    def __init__(self, name, description, items=None):
         self.name = name
         self.description = description
+        self.items = items
 
     def __str__(self):
-        return f"{self.name}. {self.description}"
+        output = f"Room: {self.name}. Description: {self.description}."
+        if self.items:
+            output += " Items:"
+            for i in self.items:
+                output += f" {i}"
+            output += "."
+            return output
+        else:
+            return output
