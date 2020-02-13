@@ -2,6 +2,9 @@
 # currently.
 
 
+from item import Item
+
+
 class Player:
     def __init__(self, name, location, items=None):
         self.name = name
@@ -14,9 +17,9 @@ class Player:
             output += " Items:" if len(self.items) > 1 else " Item:"
             for i in self.items:
                 if self.items[-1] == i:
-                    output += f" {i}"
+                    output += f" {i.name}"
                 else:
-                    output += f" {i},"
+                    output += f" {i.name},"
             output += "."
             return output
         return output
@@ -25,27 +28,26 @@ class Player:
         if self.items == None:
             self.items = []
         self.items.append(item)
-        print(f"{item} has been added to your inventory.")
+        print(f"{item.name} has been added to your inventory.")
 
     def drop(self, item):
         if self.items:
-            if self.items.__contains__(item):
-                target = self.items.index(item)
-                self.items.pop(target)
-                print(f"{item} has been removed from your inventory.")
+            target = None
+            for i, v in enumerate(self.items):
+                if item == v.name:
+                    self.items.pop(i)
+                    target = v
+                    return v
+            if target != None:
+                print(f"{target.name} removed from inventory.")
             else:
-                print("No such item in your inventory.")
+                print(f"No such item {item} in your inventory.")
         else:
             print("Your inventory is empty.")
 
 
 # p1 = Player("Michael", "Loc 1")
-# p1.get("Axe")
-# p1.get("Showel")
+# p1.get(Item("Axe", "rusty"))
+# p1.get(Item("Cheese", "smelly"))
+# p1.get(Item("Showel", "golden"))
 # print(p1)
-# p2 = Player("Michael", "Loc 2", ["Item 1", "Item 2", "Item 3"])
-# p3 = Player("Michael", "Loc 3", ["Item 1"])
-
-# print(p1)
-# print(p2)
-# print(p3)
