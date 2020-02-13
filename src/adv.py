@@ -70,8 +70,9 @@ commands = ["n", "e", "s", "w", "q", "get", "drop"]
 while status:
     print("\n======================================================\n")
     print(f"{player}")
-    user_input = input("\nTo change direction, enter: \"n\", \"e\", \"s\", \"w\". \nTo perform action, enter: \"take [item]\" or \"drop [item]\"\nCommand: ")
-    
+    user_input = input(
+        "\nTo change direction, enter: \"n\", \"e\", \"s\", \"w\". \nTo perform action, enter: \"take [item]\" or \"drop [item]\"\nCommand: ")
+
     if len(user_input) == 1:
         direction = user_input[0]
         if direction == "q":
@@ -87,51 +88,17 @@ while status:
             print("Command not found.")
     elif len(user_input) >= 2:
         command = user_input.split()[0]
-        print(command)
-        pass
-    # status = False
-
-# while status:
-# print(f"\n{player}")
-
-# action = input("\nWhich direction do you want to move?\nN, E, S, W: ").lower()
-
-# if len(action) == 1:
-#     if action[0] == "n":
-#         if hasattr(player.location, "n_to"):
-#             print(f"{player.name} decided to move North.")
-#             player.location = location.n_to
-#             location = location.n_to
-#         else:
-#             print(messages["warning_dir"])
-#     elif action[0] == "e":
-#         if hasattr(player.location, "e_to"):
-#             print(f"{player.name} decided to move East.")
-#             player.location = location.e_to
-#             location = location.e_to
-#         else:
-#             print(messages["warning_dir"])
-#     elif action[0] == "s":
-#         if hasattr(player.location, "s_to"):
-#             print(f"{player.name} decided to move South.")
-#             player.location = location.s_to
-#             location = location.s_to
-#         else:
-#             print(messages["warning_dir"])
-#     elif action[0] == "w":
-#         if hasattr(player.location, "w_to"):
-#             print(f"{player.name} decided to move West.")
-#             player.location = location.w_to
-#             location = location.w_to
-#         else:
-#             print(messages["warning_dir"])
-#     elif action[0] == "q":
-#         print(f"Thanks for playing {player.name}. Bye for now!")
-#         status = False
-#     else:
-#         print("No such direction.")
-# elif len(action) >= 2:
-#     commands = action.split()
-#     print(f"{commands}")
-# else:
-#     status = False
+        item = user_input.split()[1]
+        if command == "take":
+            if player.location.items:
+                for i, v in enumerate(player.location.items):
+                    if v.name == item:
+                        player.get(player.location.drop(v))
+        if command == "drop":
+            if player.items:
+                for i, v in enumerate(player.items):
+                    if v.name == item:
+                        player.location.get(player.drop(v))
+                        if player.location.name == "Treasure Chamber" and len(player.location.items) == 3:
+                            print("What a win! Now, take a break.")
+                            status = False

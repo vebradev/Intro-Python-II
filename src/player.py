@@ -14,7 +14,7 @@ class Player:
     def __str__(self):
         output = f"{self.name}, you are located at the {self.location}"
         if self.items:
-            output += " Items:" if len(self.items) > 1 else " Item:"
+            output += " Items in inventory:" if len(self.items) > 1 else " Item in inventory:"
             for i in self.items:
                 if self.items[-1] == i:
                     output += f" {i.name}"
@@ -34,7 +34,7 @@ class Player:
         if self.items:
             target = None
             for i, v in enumerate(self.items):
-                if item == v.name:
+                if item.name == v.name:
                     self.items.pop(i)
                     target = v
                     return v

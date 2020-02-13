@@ -41,7 +41,7 @@ class Room:
     def drop(self, item):
         if self.items:
             for i, v in enumerate(self.items):
-                if v.name == item:
+                if v.name == item.name:
                     self.items.pop(i)
                     return v
         else:
