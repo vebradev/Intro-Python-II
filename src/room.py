@@ -13,8 +13,20 @@ class Room:
         if self.items:
             output += " Items:"
             for i in self.items:
-                output += f" {i}"
+                if self.items[-1] == i:
+                    output += f" {i}"
+                else:
+                    output += f" {i},"
             output += "."
             return output
         else:
             return output
+
+
+a = Room("A ROOM", "Not so big actually", ["item", "item2"])
+b = Room("B ROOM", "Smaller than A", ["item"])
+c = Room("C ROOM", "Smallest of em all")
+
+print(a)
+print(b)
+print(c)
